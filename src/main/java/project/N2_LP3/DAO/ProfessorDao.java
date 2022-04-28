@@ -1,15 +1,17 @@
 package project.N2_LP3.DAO;
 
-import project.N2_LP3.MODEL.ProfessorModel;
+import project.N2_LP3.MODEL.Professor;
+
+import java.util.List;
 import java.util.UUID;
 
 public interface ProfessorDao {
-    int insertProfessor(UUID id, ProfessorModel professor);
+    int insertProfessor(UUID id, Professor professor);
 
-    int insertProfessor(UUID id, String name);
+    default int insertProfessor(Professor professor) {
+        UUID id = UUID.randomUUID();
+        return insertProfessor(id, professor);
+    }
 
-default int insertProfessor(ProfessorModel professor){
-    UUID id = UUID.randomUUID();
-    return insertProfessor(id, professor.getName());
-}
+    List<Professor> getAllProfessor();
 }
