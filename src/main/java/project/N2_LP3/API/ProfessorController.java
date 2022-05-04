@@ -20,7 +20,7 @@ public class ProfessorController {
     }
 
     @PostMapping("api/professor")
-    public void addPRofessor(@RequestBody Professor professor){
+    public void addProfessor(@RequestBody Professor professor){
         professorService.addProfessor(professor);
     }
 

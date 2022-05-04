@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class ProfessorService {
+    @Autowired
     private final ProfessorDao professorDao;
 
     @Autowired
