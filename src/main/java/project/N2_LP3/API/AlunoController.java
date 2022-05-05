@@ -2,16 +2,15 @@ package project.N2_LP3.API;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 import project.N2_LP3.MODEL.Aluno;
 import project.N2_LP3.MODEL.Professor;
 import project.N2_LP3.SERVICE.AlunoService;
 import project.N2_LP3.SERVICE.ProfessorService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class AlunoController {
@@ -30,5 +29,10 @@ public class AlunoController {
     @GetMapping("api/aluno")
     public List<Aluno> listAluno(){
         return alunoService.listAluno();
+    }
+
+    @DeleteMapping("api/aluno")
+    public int deleteAluno(@RequestParam("id") UUID id){
+        return alunoService.deleteAluno(id);
     }
 }

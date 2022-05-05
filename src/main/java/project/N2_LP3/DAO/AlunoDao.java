@@ -15,4 +15,8 @@ public interface AlunoDao {
     }
 
     List<Aluno> getAllAlunos();
+
+    int deleteAluno(UUID id);
+
+    int deleteAluno();
 }

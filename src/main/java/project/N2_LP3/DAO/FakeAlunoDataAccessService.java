@@ -3,20 +3,19 @@ package project.N2_LP3.DAO;
 import org.springframework.stereotype.Repository;
 import project.N2_LP3.MODEL.Aluno;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 @Repository("fakeDaoAluno")
 public class FakeAlunoDataAccessService implements AlunoDao {
     private static List<Aluno> lstGetAluno = new ArrayList<>();
     Connection connection = (Connection) ConnectionBD.conDB();
     PreparedStatement preparedStatement;
+    CallableStatement callableStatement;
 
     @Override
     public int insertAluno(UUID id, Aluno aluno) {
@@ -72,5 +71,23 @@ public class FakeAlunoDataAccessService implements AlunoDao {
             throw new RuntimeException(e);
         }
         return lstGetAluno;
+    }
+
+    @Override
+    public int deleteAluno(UUID id) {
+        try{
+            callableStatement = connection.prepareCall("{CALL spDeleteAluno(?)}");
+            callableStatement.setString(1, id.toString() );
+            callableStatement.executeUpdate();
+        }
+         catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int deleteAluno(){
+    return 1;
     }
 }

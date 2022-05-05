@@ -9,6 +9,7 @@ import project.N2_LP3.MODEL.Aluno;
 
 import java.beans.BeanProperty;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AlunoService {
@@ -26,5 +27,9 @@ public class AlunoService {
 
     public int addAluno(Aluno aluno){
         return alunoDao.insertAluno(aluno);
+    }
+
+    public int deleteAluno(UUID id) {
+        return alunoDao.deleteAluno(id);
     }
 }
