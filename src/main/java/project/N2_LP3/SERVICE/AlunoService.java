@@ -32,4 +32,8 @@ public class AlunoService {
     public int deleteAluno(UUID id) {
         return alunoDao.deleteAluno(id);
     }
+
+    public int updateAluno(Aluno aluno) {
+        return alunoDao.updateAluno(aluno);
+    }
 }

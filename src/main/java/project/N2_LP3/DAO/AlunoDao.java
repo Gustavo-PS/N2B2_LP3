@@ -18,4 +18,5 @@ public interface AlunoDao {
 
     int deleteAluno(UUID id);
 
+    int updateAluno(Aluno aluno);
 }

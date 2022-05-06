@@ -78,4 +78,22 @@ public class FakeProfessorDataAccessService implements ProfessorDao {
         }
         return 0;
     }
+
+    @Override
+    public int updateProfessor(Professor professor) {
+        try {
+            String update = "UPDATE tb_instructor SET name = ?, birthday = ?, password = ?, genre = ? WHERE id = ?`";
+            preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setString(1, professor.getName());
+            preparedStatement.setDate(2, new java.sql.Date(professor.getBirthday().getTime()));
+            preparedStatement.setString(3, professor.getPassword());
+            preparedStatement.setString(4, String.valueOf(professor.getGenre()));
+            preparedStatement.setString(5, professor.getId().toString());
+            preparedStatement.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

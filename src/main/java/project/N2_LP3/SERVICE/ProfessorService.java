@@ -30,4 +30,8 @@ public class ProfessorService {
     public int deleteProfessor(UUID id) {
         return professorDao.deleteProfessor(id);
     }
+
+    public int updateProfessor(Professor professor) {
+        return professorDao.updateProfessor(professor);
+    }
 }

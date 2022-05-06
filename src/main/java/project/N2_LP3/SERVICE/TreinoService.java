@@ -29,4 +29,8 @@ public class TreinoService {
     public int deleteTreino(UUID id) {
         return treinoDao.deleteTreino(id);
     }
+
+    public int updateTreino(Treino treino) {
+        return treinoDao.updateTreino(treino);
+    }
 }

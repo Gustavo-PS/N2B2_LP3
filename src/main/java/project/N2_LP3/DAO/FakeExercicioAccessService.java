@@ -68,4 +68,20 @@ public class FakeExercicioAccessService implements ExercicioDao {
         }
         return 0;
     }
+
+    @Override
+    public int updateExercicio(Exercicio exercicio) {
+        try {
+            String update = "UPDATE tb_exercise SET name = ?, description = ? WHERE id = ?`";
+            preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setString(1, exercicio.getName());
+            preparedStatement.setString(2, exercicio.getDescription());
+            preparedStatement.setString(3, exercicio.getId().toString());
+            preparedStatement.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

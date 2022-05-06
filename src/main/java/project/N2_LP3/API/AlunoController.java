@@ -35,4 +35,8 @@ public class AlunoController {
     public int deleteAluno(@RequestParam("id") UUID id){
         return alunoService.deleteAluno(id);
     }
+
+    @PutMapping("api/aluno")
+    public void updateAluno(@RequestBody Aluno aluno){ alunoService.updateAluno(aluno);}
+
 }

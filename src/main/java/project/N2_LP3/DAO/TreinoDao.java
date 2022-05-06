@@ -17,4 +17,6 @@ public interface TreinoDao {
         UUID id = UUID.randomUUID();
         return insertTreino(id, treino);
     }
+
+    int updateTreino(Treino treino);
 }

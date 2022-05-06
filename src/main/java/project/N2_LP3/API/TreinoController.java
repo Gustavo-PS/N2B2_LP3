@@ -28,8 +28,11 @@ public class TreinoController {
         return treinoService.listTreino();
     }
 
-    @DeleteMapping("api/exercicio")
+    @DeleteMapping("api/treino")
     public int deleteTreino(@RequestParam("id") UUID id){
         return treinoService.deleteTreino(id);
     }
+
+    @PutMapping("api/treino")
+    public int updateTreino(@RequestBody Treino treino){return treinoService.updateTreino(treino);}
 }

@@ -33,4 +33,7 @@ public class ExercicioController {
     public int deleteExercicio(@RequestParam("id") UUID id){
         return exercicioService.deleteExercicio(id);
     }
+
+    @PutMapping("api/exercicio")
+    public int updateExercicio(@RequestBody Exercicio exercicio){return exercicioService.updateExercicio(exercicio);}
 }

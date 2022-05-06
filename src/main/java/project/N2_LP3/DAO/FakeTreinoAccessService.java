@@ -50,4 +50,21 @@ public class FakeTreinoAccessService implements TreinoDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public int updateTreino(Treino treino) {
+        try {
+            String update = "UPDATE tb_training SET name = ?, description = ? WHERE id = ?`";
+            preparedStatement = connection.prepareStatement(update);
+            preparedStatement.setString(1, treino.getExercise1().toString());
+            preparedStatement.setString(2, treino.getExercise2().toString());
+            preparedStatement.setString(3, treino.getExercise3().toString());
+            preparedStatement.setString(4, treino.getId().toString());
+            preparedStatement.executeUpdate();
+            return 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

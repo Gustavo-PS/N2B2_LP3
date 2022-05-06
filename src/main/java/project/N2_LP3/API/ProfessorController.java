@@ -31,4 +31,7 @@ public class ProfessorController {
     public int deleteProfessor(@RequestParam("id") UUID id) {
         return professorService.deleteProfessor(id);
     }
+
+    @PutMapping("api/professor")
+    public int updateProfessor(@RequestBody Professor professor){return professorService.updateProfessor(professor);}
 }

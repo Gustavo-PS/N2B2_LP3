@@ -17,4 +17,6 @@ public interface ExercicioDao {
      List<Exercicio> getAllExercicio() ;
 
      int deleteExercicio(UUID id) ;
+
+    int updateExercicio(Exercicio exercicio);
 }

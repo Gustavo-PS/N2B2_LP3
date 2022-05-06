@@ -29,4 +29,8 @@ public class ExercicioService {
     public int deleteExercicio(UUID id) {
         return exercicioDao.deleteExercicio(id);
     }
+
+    public int updateExercicio(Exercicio exercicio) {
+        return exercicioDao.updateExercicio(exercicio);
+    }
 }
