@@ -18,5 +18,4 @@ public interface AlunoDao {
 
     int deleteAluno(UUID id);
 
-    int deleteAluno();
 }

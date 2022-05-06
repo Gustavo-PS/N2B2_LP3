@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 @Repository("fakeDaoAluno")
 public class FakeAlunoDataAccessService implements AlunoDao {
@@ -76,7 +75,7 @@ public class FakeAlunoDataAccessService implements AlunoDao {
     @Override
     public int deleteAluno(UUID id) {
         try{
-            callableStatement = connection.prepareCall("{CALL spDeleteAluno(?)}");
+            callableStatement = connection.prepareCall("{CALL spDeleteStudent(?)}");
             callableStatement.setString(1, id.toString() );
             callableStatement.executeUpdate();
         }
@@ -84,10 +83,5 @@ public class FakeAlunoDataAccessService implements AlunoDao {
             e.printStackTrace();
         }
         return 0;
-    }
-
-    @Override
-    public int deleteAluno(){
-    return 1;
     }
 }

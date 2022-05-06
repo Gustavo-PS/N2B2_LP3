@@ -14,4 +14,5 @@ public interface ProfessorDao {
     }
 
     List<Professor> getAllProfessor();
+    int deleteProfessor(UUID id);
 }

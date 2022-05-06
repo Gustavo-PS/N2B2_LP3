@@ -7,6 +7,7 @@ import project.N2_LP3.DAO.ProfessorDao;
 import project.N2_LP3.MODEL.Professor;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ProfessorService {
@@ -24,5 +25,9 @@ public class ProfessorService {
 
     public int addProfessor(Professor professor){
         return professorDao.insertProfessor(professor);
+    }
+
+    public int deleteProfessor(UUID id) {
+        return professorDao.deleteProfessor(id);
     }
 }
