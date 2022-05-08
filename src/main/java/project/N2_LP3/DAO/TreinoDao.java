@@ -1,6 +1,7 @@
 package project.N2_LP3.DAO;
 
 import project.N2_LP3.MODEL.Exercicio;
+import project.N2_LP3.MODEL.Professor;
 import project.N2_LP3.MODEL.Treino;
 
 import java.util.List;
@@ -19,4 +20,6 @@ public interface TreinoDao {
     }
 
     int updateTreino(Treino treino);
+
+    Treino getTreinoBD(UUID id);
 }

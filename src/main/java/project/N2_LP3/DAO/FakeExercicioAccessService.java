@@ -84,4 +84,28 @@ public class FakeExercicioAccessService implements ExercicioDao {
         }
         return 0;
     }
+
+    @Override
+    public Exercicio getExercicioBD(UUID idQuery) {
+        try {
+            String select = "SELECT * FROM `tb_exercise` where id = ?";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(select);
+            preparedStatement.setString(1, idQuery.toString());
+            ResultSet returnQueryAluno = preparedStatement.executeQuery(select);
+            while (returnQueryAluno.next()) {
+                UUID id = UUID.fromString(returnQueryAluno.getString("id"));
+                String name = returnQueryAluno.getString("name");
+                String description = returnQueryAluno.getString("description");
+
+
+                Exercicio exercicio = new Exercicio(id, name, description);
+                return exercicio;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Exercicio exercicioNull = null;
+        return exercicioNull;
+    }
 }

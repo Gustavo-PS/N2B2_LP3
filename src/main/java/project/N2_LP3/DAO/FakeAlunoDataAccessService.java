@@ -105,4 +105,34 @@ public class FakeAlunoDataAccessService implements AlunoDao {
         }
         return 0;
     }
+
+    @Override
+    public Aluno getAlunoBD(UUID idQuery) {
+        try {
+            String select = "SELECT * FROM `tb_student` where id = ?";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(select);
+            preparedStatement.setString(1, idQuery.toString());
+            ResultSet returnQueryAluno = preparedStatement.executeQuery(select);
+            while (returnQueryAluno.next()) {
+                UUID id = UUID.fromString(returnQueryAluno.getString("id"));
+                String name = returnQueryAluno.getString("name");
+                String login = returnQueryAluno.getString("login");
+                String password = returnQueryAluno.getString("password");
+                Date birthday = returnQueryAluno.getDate("birthday");
+                Character genre = returnQueryAluno.getString("genre").charAt(0);
+                Double width = returnQueryAluno.getDouble("width");
+                Double heigth = returnQueryAluno.getDouble("height");
+                String training = returnQueryAluno.getString("training");
+                String instructor = returnQueryAluno.getString("instructor");
+
+                Aluno aluno = new Aluno(id, name, login, password, birthday, genre, width, heigth, training, instructor);
+                return aluno;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Aluno alunoNull = null;
+        return alunoNull;
+    }
 }

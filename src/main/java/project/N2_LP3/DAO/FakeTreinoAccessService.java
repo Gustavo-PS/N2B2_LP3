@@ -1,13 +1,12 @@
 package project.N2_LP3.DAO;
 
 import project.N2_LP3.MODEL.Exercicio;
+import project.N2_LP3.MODEL.Professor;
 import project.N2_LP3.MODEL.Treino;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,11 +26,37 @@ public class FakeTreinoAccessService implements TreinoDao {
 
     @Override
     public List<Treino> getAllTreino() {
+        try {
+            String select = "SELECT * FROM `tb_training`";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(select);
+            ResultSet returnQueryExercicio = preparedStatement.executeQuery(select);
+            while (returnQueryExercicio.next()) {
+                UUID id = UUID.fromString(returnQueryExercicio.getString("id"));
+                String exercicio1 = returnQueryExercicio.getString("exercise_1");
+                String exercicio2= returnQueryExercicio.getString("exercise_2");
+                String exercicio3 = returnQueryExercicio.getString("exercise_3");
+
+
+                Treino treino = new Treino(id, UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
+                lstGetTreino.add(treino);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return lstGetTreino;
     }
 
     @Override
     public int deleteTreino(UUID id) {
+        try{
+            callableStatement = connection.prepareCall("{CALL spDeleteTraining(?)}");
+            callableStatement.setString(1, id.toString() );
+            callableStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -66,5 +91,29 @@ public class FakeTreinoAccessService implements TreinoDao {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public Treino getTreinoBD(UUID idQuery) {
+        try {
+            String select = "SELECT * FROM `tb_training` where id = ?";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(select);
+            preparedStatement.setString(1, idQuery.toString());
+            ResultSet returnQueryAluno = preparedStatement.executeQuery(select);
+            while (returnQueryAluno.next()) {
+                UUID id = UUID.fromString(returnQueryAluno.getString("id"));
+                String exercicio1 = returnQueryAluno.getString("exercise_1");
+                String exercicio2 = returnQueryAluno.getString("exercise_2");
+                String exercicio3= returnQueryAluno.getString("exercise_3");
+
+                Treino treino = new Treino(id,UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
+                return treino;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Treino treinoNull = null;
+        return treinoNull;
     }
 }

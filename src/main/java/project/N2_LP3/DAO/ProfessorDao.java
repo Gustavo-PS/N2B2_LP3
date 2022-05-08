@@ -1,5 +1,6 @@
 package project.N2_LP3.DAO;
 
+import project.N2_LP3.MODEL.Aluno;
 import project.N2_LP3.MODEL.Professor;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface ProfessorDao {
     int deleteProfessor(UUID id);
 
     int updateProfessor(Professor professor);
+    Professor getProfessorBD(UUID id);
 }

@@ -96,4 +96,30 @@ public class FakeProfessorDataAccessService implements ProfessorDao {
         }
         return 0;
     }
+
+    @Override
+    public Professor getProfessorBD(UUID idQuery) {
+        try {
+            String select = "SELECT * FROM `tb_instructor` where id = ?";
+            preparedStatement = (PreparedStatement) connection.prepareStatement(select);
+            preparedStatement.setString(1, idQuery.toString());
+            ResultSet returnQueryAluno = preparedStatement.executeQuery(select);
+            while (returnQueryAluno.next()) {
+                UUID id = UUID.fromString(returnQueryAluno.getString("id"));
+                String name = returnQueryAluno.getString("name");
+                String login = returnQueryAluno.getString("login");
+                String password = returnQueryAluno.getString("password");
+                Date birthday = returnQueryAluno.getDate("birthday");
+                Character genre = returnQueryAluno.getString("genre").charAt(0);
+
+                Professor professor = new Professor(id, name, login, password, birthday, genre);
+                return professor;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        Professor professorNull = null;
+        return professorNull;
+    }
 }

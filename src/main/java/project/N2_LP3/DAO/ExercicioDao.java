@@ -19,4 +19,5 @@ public interface ExercicioDao {
      int deleteExercicio(UUID id) ;
 
     int updateExercicio(Exercicio exercicio);
+    Exercicio getExercicioBD(UUID idQuery);
 }
