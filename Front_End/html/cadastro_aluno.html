@@ -1,69 +1,105 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>MOVE UP!</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-        <link rel="stylesheet" href="../CSS/cadastro.css">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <nav>
-            <input type="checkbox" id="check">
-            <label for="check" class="checkbtn">
-                <i class ="fas fa-bars"></i>
-            </label>
-            <label class = "titulo">MOVE UP!</label>
-            <ul>
-                <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
-                <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar instrutor</a></li>
-                <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
-                <li><a href="#">Visualizar Treinos</a></li>
-                <li><a href="../html/login.html" target="_parent">Logout</a></li>
-            </ul>
-        </nav>
-        <div class="cadastro-width" style="background-color: rgb(12 12 22);">
-            <form class="cadastro-form">
-                <h1 class="cadastro-titulo"> Cadastro de Aluno </h1>
-                    <div class="form-control">
-                        <input type="text" placeholder="Nome">
-                        <i class="far fa-address-book"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Login">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="password" placeholder="Senha">
-                        <i class="fas fa-lock"></i>
-                    </div> 
-                    <div class="form-control">
-                        <input type="data" placeholder="Data de nascimento">
-                        <i class="far fa-calendar-alt"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Genero">
-                        <i class="fas fa-restroom"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Altura">
-                        <i class="fas fa-arrows-alt-v"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Peso">
-                        <i class="fas fa-weight"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Treino">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" placeholder="Instrutor">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <button class="cadastro" translate="" onclick="">Cadastrar</button>
-            </form>
-        </div>
-        </body>
+
+<head>
+    <title>MOVE UP!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="titulo">MOVE UP!</label>
+        <ul>
+            <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
+            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar instrutor</a></li>
+            <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
+            <li><a href="#">Visualizar Treinos</a></li>
+            <li><a href="../html/login.html" target="_parent">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="cadastro-width" style="background-color: rgb(12 12 22);">
+        <form class="cadastro-form">
+            <h1 class="cadastro-titulo"> Cadastro de Aluno </h1>
+            <div class="form-control">
+                <input id="nome" type="text" placeholder="Nome">
+                <i class="far fa-address-book"></i>
+            </div>
+            <div class="form-control">
+                <input id="login" type="text" placeholder="Login">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="form-control">
+                <input id="password" type="password" placeholder="Senha">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="form-control">
+                <input id="birthday" type="data" placeholder="Data de nascimento">
+                <i class="far fa-calendar-alt"></i>
+            </div>
+            <div class="form-control">
+                <input id="genre" type="text" placeholder="Genero">
+                <i class="fas fa-restroom"></i>
+            </div>
+            <div class="form-control">
+                <input id="heigth" type="text" placeholder="Altura">
+                <i class="fas fa-arrows-alt-v"></i>
+            </div>
+            <div class="form-control">
+                <input id="width" type="text" placeholder="Peso">
+                <i class="fas fa-weight"></i>
+            </div>
+            <div class="form-control">
+                <input id="trainning" type="text" placeholder="Treino">
+                <i class="fas fa-child"></i>
+            </div>
+            <div class="form-control">
+                <input id="instructor" type="text" placeholder="Instrutor">
+                <i class="fas fa-user"></i>
+            </div>
+            <button class="cadastro" translate="" onclick="insereAluno()">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        function insereAluno() {
+            debugger;
+            try {
+                var req = new XMLHttpRequest();
+                req.open("post", "http://localhost:8080/api/aluno", false);
+                req.setRequestHeader("Content-Type", "application/json");
+
+                var body = JSON.stringify({
+                    "name": document.getElementById("nome").value,
+                    "login": document.getElementById("login").value ,
+                    "password": document.getElementById("password").value,
+                    "birthday": document.getElementById("birthday").value.split("/")[2] + "-" +
+                        document.getElementById("birthday").value.split("/")[1] + "-" +
+                        document.getElementById("birthday").value.split("/")[0] + "T00:00:00" ,
+                    "genre": document.getElementById("genre").value ,
+                    "width": document.getElementById("width").value ,
+                    "heigth": document.getElementById("heigth").value ,
+                    "training": document.getElementById("trainning").value ,
+                    "instructor": document.getElementById("instructor").value
+                });             
+
+                req.send(body);
+            }
+            catch {
+
+            }
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+        }
+
+    </script>
+</body>
+
 </html>

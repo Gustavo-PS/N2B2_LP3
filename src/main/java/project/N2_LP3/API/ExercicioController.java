@@ -20,20 +20,24 @@ public class ExercicioController {
     }
 
     @PostMapping("api/exercicio")
+    @CrossOrigin
     public void addExercicio(@RequestBody Exercicio exercicio){
         exercicioService.addExercicio(exercicio);
     }
 
     @GetMapping("api/exercicio")
+    @CrossOrigin
     public List<Exercicio> listExercicio(){
         return exercicioService.listExercicio();
     }
 
     @DeleteMapping("api/exercicio")
+    @CrossOrigin
     public int deleteExercicio(@RequestParam("id") UUID id){
         return exercicioService.deleteExercicio(id);
     }
 
     @PutMapping("api/exercicio")
+    @CrossOrigin
     public int updateExercicio(@RequestBody Exercicio exercicio){return exercicioService.updateExercicio(exercicio);}
 }

@@ -22,21 +22,25 @@ public class AlunoController {
     }
 
     @PostMapping("api/aluno")
+    @CrossOrigin
     public void addAluno(@RequestBody Aluno aluno){
         alunoService.addAluno(aluno);
     }
 
     @GetMapping("api/aluno")
+    @CrossOrigin
     public List<Aluno> listAluno(){
         return alunoService.listAluno();
     }
 
     @DeleteMapping("api/aluno")
+    @CrossOrigin
     public int deleteAluno(@RequestParam("id") UUID id){
         return alunoService.deleteAluno(id);
     }
 
     @PutMapping("api/aluno")
+    @CrossOrigin
     public void updateAluno(@RequestBody Aluno aluno){ alunoService.updateAluno(aluno);}
 
 }
