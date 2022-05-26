@@ -32,12 +32,13 @@ public class FakeTreinoAccessService implements TreinoDao {
             ResultSet returnQueryExercicio = preparedStatement.executeQuery(select);
             while (returnQueryExercicio.next()) {
                 UUID id = UUID.fromString(returnQueryExercicio.getString("id"));
+                String name = returnQueryExercicio.getString("name");
                 String exercicio1 = returnQueryExercicio.getString("exercise_1");
                 String exercicio2= returnQueryExercicio.getString("exercise_2");
                 String exercicio3 = returnQueryExercicio.getString("exercise_3");
 
 
-                Treino treino = new Treino(id, UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
+                Treino treino = new Treino(id, name, UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
                 lstGetTreino.add(treino);
             }
 
@@ -63,12 +64,13 @@ public class FakeTreinoAccessService implements TreinoDao {
     @Override
     public int insertTreino(UUID id, Treino treino) {
         try {
-            String insert = "INSERT INTO tb_training(id, exercise_1, exercise_2,exercise_3) VALUES (?,?,?,?)";
+            String insert = "INSERT INTO tb_training(id, name, exercise_1, exercise_2,exercise_3) VALUES (?,?,?,?,?)";
             preparedStatement = (PreparedStatement) connection.prepareStatement(insert);
             preparedStatement.setString(1, id.toString());
-            preparedStatement.setString(2, treino.getExercise1().toString());
-            preparedStatement.setString(3, treino.getExercise2().toString());
-            preparedStatement.setString(4, treino.getExercise3().toString());
+            preparedStatement.setString(2,treino.getName());
+            preparedStatement.setString(3, treino.getExercise1().toString());
+            preparedStatement.setString(4, treino.getExercise2().toString());
+            preparedStatement.setString(5, treino.getExercise3().toString());
             preparedStatement.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -79,12 +81,13 @@ public class FakeTreinoAccessService implements TreinoDao {
     @Override
     public int updateTreino(Treino treino) {
         try {
-            String update = "UPDATE tb_training SET name = ?, description = ? WHERE id = ?`";
+            String update = "UPDATE tb_training SET name = ?, exercise_1 = ?, exercise_2 = ?, exercise_3 = ? WHERE id = ?`";
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, treino.getExercise1().toString());
-            preparedStatement.setString(2, treino.getExercise2().toString());
-            preparedStatement.setString(3, treino.getExercise3().toString());
-            preparedStatement.setString(4, treino.getId().toString());
+            preparedStatement.setString(2, treino.getName());
+            preparedStatement.setString(3, treino.getExercise2().toString());
+            preparedStatement.setString(4, treino.getExercise3().toString());
+            preparedStatement.setString(5, treino.getId().toString());
             preparedStatement.executeUpdate();
             return 1;
         } catch (SQLException e) {
@@ -102,11 +105,12 @@ public class FakeTreinoAccessService implements TreinoDao {
             ResultSet returnQueryAluno = preparedStatement.executeQuery(select);
             while (returnQueryAluno.next()) {
                 UUID id = UUID.fromString(returnQueryAluno.getString("id"));
+                String name = returnQueryAluno.getString("name");
                 String exercicio1 = returnQueryAluno.getString("exercise_1");
                 String exercicio2 = returnQueryAluno.getString("exercise_2");
                 String exercicio3= returnQueryAluno.getString("exercise_3");
 
-                Treino treino = new Treino(id,UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
+                Treino treino = new Treino(id,name,UUID.fromString(exercicio1),UUID.fromString(exercicio2),UUID.fromString(exercicio3));
                 return treino;
             }
 

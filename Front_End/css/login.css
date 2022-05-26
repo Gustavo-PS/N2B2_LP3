@@ -150,15 +150,47 @@ button.cadastro:hover {
     color: var(--bg-color);
 }
 
+.radio-toolbar {
+    margin: 10px;
+    align-self: center;
+}
+
+.radio-toolbar input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    margin: 20px;
+    position: absolute;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 16px;
+    border: 2px solid var(--light-color);
+    border-radius: 4px;
+    margin: 15px;
+}
+
+.radio-toolbar label:hover {
+    background-color: var(--mid-color);
+    color: var(--light-color);
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: var(--light-color);
+    color: var(--mid-color);
+}
+
+
 /* ----  Responsiveness   ----  */
 @media (max-width: 780px) {
-
+    
     body {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-
+    
     .side {
         display: none;
     }

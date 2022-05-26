@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08-Maio-2022 às 20:57
+-- Tempo de geração: 26-Maio-2022 às 20:48
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 7.1.32
 
@@ -47,6 +47,13 @@ CREATE TABLE `tb_exercise` (
   `description` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `tb_exercise`
+--
+
+INSERT INTO `tb_exercise` (`id`, `name`, `description`) VALUES
+('35323c1d-0c8b-4081-8aba-4048b0291210', 'Treino - Michael Oliveira', 'Correr 20km');
+
 -- --------------------------------------------------------
 
 --
@@ -67,7 +74,8 @@ CREATE TABLE `tb_instructor` (
 --
 
 INSERT INTO `tb_instructor` (`id`, `name`, `login`, `password`, `birthday`, `genre`) VALUES
-('d687fd82-d13f-45f9-ab92-475f4d704b96', 'Gustavo', 'pepinellas', 'testesenha123', '2022-05-03', 'M');
+('6d6fd735-7567-43be-a4e5-5dd168bc3e7f', 'Gustavo Pepinelli Salgado', 'pepinelli_professor', '123', '2001-02-04', 'M'),
+('9c2d5b44-3461-40e9-9d4d-f9ec7389f28b', 'Rodrigo Montemor', 'rodrigo_professor', '123', '2001-09-30', 'M');
 
 -- --------------------------------------------------------
 
@@ -88,6 +96,13 @@ CREATE TABLE `tb_student` (
   `login` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Extraindo dados da tabela `tb_student`
+--
+
+INSERT INTO `tb_student` (`id`, `name`, `birthday`, `password`, `genre`, `height`, `width`, `training`, `instructor`, `login`) VALUES
+('cb4ad64d-e9c4-416b-ba04-78055538941b', 'Michael Oliveira', '1929-12-30', '123', 'M', 183, 85, '35323c1d-0c8b-4081-8aba-4048b0291210', '6d6fd735-7567-43be-a4e5-5dd168bc3e7f', 'michael_aluno');
+
 -- --------------------------------------------------------
 
 --
@@ -96,10 +111,18 @@ CREATE TABLE `tb_student` (
 
 CREATE TABLE `tb_training` (
   `id` varchar(40) NOT NULL,
+  `name` varchar(40) NOT NULL,
   `exercise_1` varchar(40) NOT NULL,
-  `exercise_2` varchar(40) NOT NULL,
-  `exercise_3` varchar(40) NOT NULL
+  `exercise_2` varchar(40) DEFAULT NULL,
+  `exercise_3` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tb_training`
+--
+
+INSERT INTO `tb_training` (`id`, `name`, `exercise_1`, `exercise_2`, `exercise_3`) VALUES
+('d687fd82-d13f-45f9-ab92-475f4d704b32', 'Treino A', 'd687fd82-d13f-45f9-ab92-475f4d704b45', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas

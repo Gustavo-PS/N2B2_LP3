@@ -1,0 +1,269 @@
+:root{
+    --bg-color: rgb(12, 12, 22);
+    --mid-color: rgb(20, 20, 29);
+    --light-color : rgb(217, 236, 238);
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: var(--light-color);
+}
+
+body{
+    background-image: url(../IMG/academia.jpg);
+    display: grid;
+    place-items: center;
+}
+
+
+nav{
+    background-color: var(--bg-color);
+    height: 80px;
+    width: 100%;
+}
+
+label.titulo{
+    color: var(--light-color);
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+}
+
+nav ul li a{
+    font-size: 17px;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 5px;
+}
+
+nav ul li a:hover{
+    color: var(--bg-color);
+    background-color: var(--light-color);
+}
+
+.checkbtn{
+    font-size: 30px;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
+
+#check{
+    display: none;
+}
+
+.form-control {
+    width: 80%;
+    position: relative;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cadastro-titulo{
+    width: 95%;
+    margin-bottom: 25px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cadastro-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+button.cadastro {
+    background-color: var(--bg-color);
+    color: var(--light-color);
+    border-color: var(--light-color);
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 14px 40px;
+    margin: 10px auto;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.4s;
+}
+
+button.cadastro:hover {
+    background-color: var(--light-color);
+    color: var(--bg-color);
+}
+
+input,
+button,
+select {
+    border: 2px solid;
+    border-color: var(--light-color);
+    outline: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    background: none;
+}
+
+input,
+select {
+    width: 100%;
+    color: var(--light-color);
+    letter-spacing: 0.5px;
+    padding: 14px 64px;
+    color: var(--light-color);
+}
+
+input ~ i {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color   0.4s;
+    opacity: 0.6;
+}
+
+select ~ i {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color   0.4s;
+    opacity: 0.6;
+}
+
+option{
+    background-color: var(--bg-color);
+    margin: 10px;
+}
+
+input:focus ~ i {
+    opacity:1;
+}
+
+#check:checked ~ .cadastro-width{
+    display: none;
+}
+
+.cadastro-width{
+    width: 60%;
+    min-width: 362px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    margin-bottom: auto;
+    border-radius: 40px;
+    padding: 20px;
+}
+
+.radio-toolbar {
+    margin: 10px;
+    float: right;
+}
+
+.radio-toolbar input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    margin: 20px;
+    position: absolute;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 16px;
+    border: 2px solid var(--light-color);
+    border-radius: 4px;
+    margin: 15px;
+}
+
+.radio-toolbar label:hover {
+    background-color: var(--mid-color);
+    color: var(--light-color);
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: var(--light-color);
+    color: var(--mid-color);
+}
+
+.Gender{
+    border: 2px solid;
+    border-color: var(--light-color);
+    outline: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    background: none;
+    width: 80%;
+    position: relative;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Gender a{
+    margin-right: 70px;
+    margin-left: 10px;
+}
+
+@media(max-width: 1860px){
+    .checkbtn{
+        display: block;
+    }
+
+    label.titulo{
+        color: var(--light-color);
+        font-size: 35px;
+        line-height: 80px;
+        padding: 0 50px;
+        font-weight: bold;
+    }
+
+    ul{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 80px;
+        left: -100%;
+        text-align: center;
+        transition: all .5s;
+        background-color: var(--mid-color);
+    }
+
+    nav ul li{
+        display: block;
+        margin: 50px 0;
+        line-height: 30px;
+    }
+
+    nav ul li a{
+        font-size: 20px;
+    }
+
+    #check:checked ~ ul{
+        left: 0;
+    }
+
+}
+

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>MOVE UP!</title>
     <meta charset="UTF-8">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../CSS/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <section class="side">
         
@@ -20,21 +22,83 @@
             
             <form class="login-form">
                 <div class="form-control">
-                    <input type="text" placeholder="Usuário">
+                    <input type="text" placeholder="Usuário" id="login">
                     <i class="fas fa-user"></i>
                 </div>
                 <div class="form-control">
-                    <input type="password" placeholder="Senha">
+                    <input type="password" placeholder="Senha" id="password">
                     <i class="fas fa-lock"></i>
                 </div>
                 
-                <button class="submit" onclick="parent.location='menu.html'">Login</button>
+                <div class="radio-toolbar">
+                    <input type="radio" id="radiobtn1" name="fav_language" value="1" checked>
+                    <label for ="radiobtn1">Aluno</label>
+
+                    <input type="radio" id="radiobtn2" name="fav_language" value="2">
+                    <label for="radiobtn2">Instrutor</label>
+                </div>
+                
+                <button type="button" class="submit" onclick="realizaLogin()">Login</button>
                 
                 <button class="cadastro">Cadastro</button>
             </form>
         </div>
     </section>
     
-    
+    <script>
+        function realizaLogin() {
+            if (document.querySelector('input[name="fav_language"]:checked').value != null) {
+                var url;
+                var result;
+                var resultArray;
+
+                if (document.querySelector('input[name="fav_language"]:checked').value == 1) {
+                    url = "aluno";
+                    var req = new XMLHttpRequest();
+                    req.open("get", "http://localhost:8080/api/" + url, false);
+                    req.send();
+                    result = req.responseText;
+                    resultArray = JSON.parse(result);
+
+                    for (var x = 0; x < resultArray.length; x++) {
+                        if (resultArray[x].login == document.getElementById("login").value && resultArray[x].password == document.getElementById("password").value) {
+                            localStorage.setItem("id", resultArray[x].id);
+                            localStorage.setItem("type", "1");
+                            localStorage.setItem("treino", resultArray[x].training);
+                            window.location.href = "menu.html";
+                            return false;
+                        }
+                    }
+                    alert("Login ou senha inválida");
+                }
+
+
+                else {
+                    url = "professor";
+                    var req = new XMLHttpRequest();
+                    req.open("get", "http://localhost:8080/api/" + url, false);
+                    req.send();
+                    result = req.responseText;
+                    resultArray = JSON.parse(result);
+
+                    for (var x = 0; x < resultArray.length; x++) {
+                        if (resultArray[x].login == document.getElementById("login").value && resultArray[x].password == document.getElementById("password").value) {
+                            localStorage.setItem("id", resultArray[x].id);
+                            localStorage.setItem("type", "2");
+                            window.location.href = "menu.html";
+
+                            return false;
+                        }
+                    }
+                    alert("Login ou senha inválida");
+
+                }
+            }
+        }
+
+
+    </script>
+
 </body>
+
 </html>

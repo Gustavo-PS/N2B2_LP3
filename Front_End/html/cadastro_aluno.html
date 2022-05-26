@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MOVE UP!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body onload="obtemTreinador()">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="titulo">MOVE UP!</label>
+        <ul style="z-index: 5;">
+            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar Instrutor</a></li>
+            <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
+            <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
+            <li><a href="../html/alunos.html" target="_parent">Alunos</a></li>
+            <li><a href="../html/treinos.html" target="_parent">Treinos</a></li>
+            <li><a href="../html/login.html" target="_parent">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="cadastro-width" style="background-color: rgb(12 12 22);">
+        <form class="cadastro-form">
+            <h1 class="cadastro-titulo"> CADASTRO DE ALUNO </h1>
+            <div class="form-control">
+                <input id="nome" type="text" placeholder="Nome">
+                <i class="far fa-address-book"></i>
+            </div>
+            <div class="form-control">
+                <input id="login" type="text" placeholder="Login">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="form-control">
+                <input id="password" type="password" placeholder="Senha">
+                <i class="fas fa-lock"></i>
+            </div>
+            <div class="form-control">
+                <input id="birthday" type="data" placeholder="Data de nascimento">
+                <i class="far fa-calendar-alt"></i>
+            </div>
+            <div class="Gender">
+                <div class="radio-toolbar">
+                    <i class="fas fa-restroom"></i>
+                    <a>Gênero</a>
+                    <input type="radio" id="radiobtn1" name="rdGenre" value="M" checked>
+                    <label for="radiobtn1">Masculino</label>
+
+                    <input type="radio" id="radiobtn2" name="rdGenre" value="F">
+                    <label for="radiobtn2">Feminino</label>
+                </div>
+            </div>
+            <div class="form-control">
+                <input id="heigth" type="text" placeholder="Altura">
+                <i class="fas fa-arrows-alt-v"></i>
+            </div>
+            <div class="form-control">
+                <input id="width" type="text" placeholder="Peso">
+                <i class="fas fa-weight"></i>
+            </div>
+            <div class="form-control">
+                <select name="instructors" id="selectTreinos">
+
+                </select>
+                <i class="fas fa-child"></i>
+            </div>
+            <div class="form-control">
+                <select name="instructors" id="selectInstructors">
+
+                </select>
+                <i class="fas fa-user"></i>
+
+            </div>
+            <button class="cadastro" translate="" onclick="insereAluno()">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+        function insereAluno() {
+            
+            try {
+                var req = new XMLHttpRequest();
+                req.open("post", "http://localhost:8080/api/aluno", false);
+                req.setRequestHeader("Content-Type", "application/json");
+
+                var body = JSON.stringify({
+                    "name": document.getElementById("nome").value,
+                    "login": document.getElementById("login").value,
+                    "password": document.getElementById("password").value,
+                    "birthday": document.getElementById("birthday").value.split("/")[2] + "-" +
+                        document.getElementById("birthday").value.split("/")[1] + "-" +
+                        document.getElementById("birthday").value.split("/")[0] + "T00:00:00",
+                    "genre": document.querySelector('input[name="rdGenre"]:checked').value,
+                    "width": document.getElementById("width").value,
+                    "heigth": document.getElementById("heigth").value,
+                    "training": document.getElementById("selectTreinos").value,
+                    "instructor": document.getElementById("selectInstructors").value
+                });
+
+                req.send(body);
+            }
+            catch {
+
+            }
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+        }
+
+        function obtemTreinos() {
+            
+            var req = new XMLHttpRequest();
+            req.open("get", "http://localhost:8080/api/exercicio", false);
+            req.send();
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+
+            for (var x = 0; x < resultArray.length; x++) {
+                var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+                document.getElementById("selectTreinos").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()))
+            }
+        }
+
+        function obtemTreinador() {
+            
+            var req = new XMLHttpRequest();
+            req.open("get", "http://localhost:8080/api/professor", false);
+            req.send();
+            var result;
+            result = req.responseText;
+            var resultArray;
+            resultArray = JSON.parse(result);
+
+            for (var x = 0; x < resultArray.length; x++) {
+                var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+                document.getElementById("selectInstructors").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()))
+            }
+            obtemTreinos();
+        }
+
+    </script>
+</body>
+
+</html>

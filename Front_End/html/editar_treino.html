@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MOVE UP!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body onload="ocultaBotoes()">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class ="fas fa-bars"></i>
+        </label>
+        <label class = "titulo">MOVE UP!</label>
+        <ul style="z-index: 5;">
+            <li><a href="../html/cadastro_instrutor.html" target="_parent" id="btnCadastrarProfessor">Cadastrar
+                Instrutor</a></li>
+        <li ><a href="../html/cadastro_aluno.html" target="_parent" id="btnCadastrarAluno">Cadastrar Alunos</a>
+        </li>
+        <li><a href="../html/cadastro_exercicios.html" target="_parent" id="btnCadastrarTreino">Cadastrar
+                Treinos</a></li>
+        <li><a href="../html/alunos.html" target="_parent" id="btnAluno">Alunos</a></li>
+        <li><a href="../html/treinos.html" target="_parent" id="btnTreino">Treinos</a></li>
+        <li><a href="../html/login.html" target="_parent" id="btnLogout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="cadastro-width" style="background-color: rgb(12 12 22);">
+        <form class="cadastro-form">
+            <h1 class="cadastro-titulo"> SEU TREINO </h1>
+            <div class="form-control">
+                <input id="inputName" type="text" placeholder="Nome">
+            </div>
+            <div class="form-control">
+                <input id="inputDescription" type="text" placeholder="Descrição">
+            </div>
+           
+        </form>
+    </div>
+
+    <script>
+        function ocultaBotoes() {
+            var id = localStorage.getItem("id");
+            var tipo = localStorage.getItem("type");
+
+            if (tipo == "1") {
+                document.getElementById("btnCadastrarAluno").style.display = "none";
+                document.getElementById("btnCadastrarProfessor").style.display = "none";
+                document.getElementById("btnCadastrarTreino").style.display = "none";
+                document.getElementById("btnAluno").style.display = "none";
+            } else {
+
+            }
+            obtemTreino();
+        }
+
+        function obtemTreino() {
+
+            var req = new XMLHttpRequest();
+            req.open("get", "http://localhost:8080/api/exercicio", false);
+            req.send();
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+
+            for (var x = 0; x < resultArray.length; x++) {
+                if (resultArray[x].id = localStorage.getItem("treino")) {
+                    
+                    document.getElementById("inputName").value =resultArray[x].name;
+                    document.getElementById("inputDescription").value = resultArray[x].description;
+                    document.getElementById("inputName").disabled = true;
+                    document.getElementById("inputDescription").disabled = true;
+                    break;
+                }
+            }
+        }
+
+        function atualizaTreino(){
+            var req = new XMLHttpRequest();
+                req.open("put", "http://localhost:8080/api/exercicio", false);
+                req.setRequestHeader("Content-Type", "application/json");
+
+                var body = JSON.stringify({
+                    "id": localStorage.getItem("treino"),
+                    "name": document.getElementById("inputName").value,
+                    "description": document.getElementById("inputDescription").value
+                });
+                
+                req.send(body);
+        }
+    </script>
+</body>
+</html>

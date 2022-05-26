@@ -1,5 +1,6 @@
 package project.N2_LP3.DAO;
 
+import org.springframework.stereotype.Repository;
 import project.N2_LP3.MODEL.Aluno;
 import project.N2_LP3.MODEL.Exercicio;
 import project.N2_LP3.SERVICE.ExercicioService;
@@ -10,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Repository("fakeDaoExercicio")
 public class FakeExercicioAccessService implements ExercicioDao {
 
     private static List<Exercicio> lstGetExercicio = new ArrayList<>();
@@ -72,7 +74,7 @@ public class FakeExercicioAccessService implements ExercicioDao {
     @Override
     public int updateExercicio(Exercicio exercicio) {
         try {
-            String update = "UPDATE tb_exercise SET name = ?, description = ? WHERE id = ?`";
+            String update = "UPDATE tb_exercise SET name = ?, description = ? WHERE id = ?";
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, exercicio.getName());
             preparedStatement.setString(2, exercicio.getDescription());

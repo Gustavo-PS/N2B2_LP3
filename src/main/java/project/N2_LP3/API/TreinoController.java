@@ -19,20 +19,24 @@ public class TreinoController {
     }
 
     @PostMapping("api/treino")
+    @CrossOrigin
     public void addTreino(@RequestBody Treino treino){
         treinoService.addTreino(treino);
     }
 
     @GetMapping("api/treino")
+    @CrossOrigin
     public List<Treino> listTreino(){
         return treinoService.listTreino();
     }
 
     @DeleteMapping("api/treino")
+    @CrossOrigin
     public int deleteTreino(@RequestParam("id") UUID id){
         return treinoService.deleteTreino(id);
     }
 
     @PutMapping("api/treino")
+    @CrossOrigin
     public int updateTreino(@RequestBody Treino treino){return treinoService.updateTreino(treino);}
 }

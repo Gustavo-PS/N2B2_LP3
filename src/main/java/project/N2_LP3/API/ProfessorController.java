@@ -18,20 +18,24 @@ public class ProfessorController {
     }
 
     @PostMapping("api/professor")
+    @CrossOrigin
     public void addProfessor(@RequestBody Professor professor) {
         professorService.addProfessor(professor);
     }
 
     @GetMapping("api/professor")
+    @CrossOrigin
     public List<Professor> listProfessor() {
         return professorService.listProfessor();
     }
 
     @DeleteMapping("api/professor")
+    @CrossOrigin
     public int deleteProfessor(@RequestParam("id") UUID id) {
         return professorService.deleteProfessor(id);
     }
 
     @PutMapping("api/professor")
+    @CrossOrigin
     public int updateProfessor(@RequestBody Professor professor){return professorService.updateProfessor(professor);}
 }

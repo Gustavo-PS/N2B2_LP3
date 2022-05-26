@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MOVE UP!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body onload="obtemAluno()">
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class ="fas fa-bars"></i>
+        </label>
+        <label class = "titulo">MOVE UP!</label>
+        <ul style="z-index: 5;">
+            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar Instrutor</a></li>
+            <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
+            <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
+            <li><a href="../html/alunos.html" target="_parent">Alunos</a></li>
+            <li><a href="../html/treinos.html" target="_parent">Treinos</a></li>
+            <li><a href="../html/login.html" target="_parent">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="cadastro-width" style="background-color: rgb(12 12 22);">
+        <form class="cadastro-form">
+            <h1 class="cadastro-titulo"> ALUNOS </h1>
+            <div class="form-control">
+                <select onchange="armazenaAlunoSelecionado()" name="students" id="selectStudents">
+                </select>
+                <i class="fas fa-user"></i>
+                
+            </div>
+            <button class="cadastro" type="button" translate="" onclick="redireciona()">Selecionar</button>
+        </form>
+    </div>
+
+    <script>
+
+function obtemAluno() {
+
+var req = new XMLHttpRequest();
+req.open("get", "http://localhost:8080/api/aluno", false);
+req.send();
+var result = req.responseText;
+var resultArray = JSON.parse(result);
+
+for (var x = 0; x < resultArray.length; x++) {
+        var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+        document.getElementById("selectStudents").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()));
+    
+}
+}
+function editarTela(){
+window.location.href = "editar_treino.html";
+}
+
+function armazenaAlunoSelecionado(){
+    localStorage.setItem("alunoSelecionado", document.getElementById("selectStudents").value);
+}
+
+function redireciona(){
+    window.location.href = "editar_aluno.html";
+}
+    </script>
+</body>
+</html>
