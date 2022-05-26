@@ -20,16 +20,15 @@
         <ul style="z-index: 5;">
             <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar Instrutor</a></li>
             <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
-            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar instrutor</a></li>
             <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
-            <li><a href="#">Alunos</a></li>
-            <li><a href="#">Treinos</a></li>
+            <li><a href="../html/alunos.html" target="_parent">Alunos</a></li>
+            <li><a href="../html/treinos.html" target="_parent">Treinos</a></li>
             <li><a href="../html/login.html" target="_parent">Logout</a></li>
         </ul>
     </nav>
     <div class="cadastro-width" style="background-color: rgb(12 12 22);">
         <form class="cadastro-form">
-            <h1 class="cadastro-titulo"> Cadastro de Aluno </h1>
+            <h1 class="cadastro-titulo"> CADASTRO DE ALUNO </h1>
             <div class="form-control">
                 <input id="nome" type="text" placeholder="Nome">
                 <i class="far fa-address-book"></i>
@@ -46,9 +45,16 @@
                 <input id="birthday" type="data" placeholder="Data de nascimento">
                 <i class="far fa-calendar-alt"></i>
             </div>
-            <div class="form-control">
-                <input id="genre" type="text" placeholder="Genero">
-                <i class="fas fa-restroom"></i>
+            <div class="Gender">
+                <div class="radio-toolbar">
+                    <i class="fas fa-restroom"></i>
+                    <a>Gênero</a>
+                    <input type="radio" id="radiobtn1" name="fav_language" value="M" checked>
+                    <label for ="radiobtn1">Masculino</label>
+                    
+                    <input type="radio" id="radiobtn2" name="fav_language" value="F">
+                    <label for="radiobtn2">Feminino</label>
+                </div>
             </div>
             <div class="form-control">
                 <input id="heigth" type="text" placeholder="Altura">
@@ -59,13 +65,15 @@
                 <i class="fas fa-weight"></i>
             </div>
             <div class="form-control">
-                <input id="trainning" type="text" placeholder="Treino">
-                <select name="instructors" id="selectTreinos"></select>
+                <select name="instructors" id="selectTreinos">
+                    <option>Treino</option>
+                </select>
                 <i class="fas fa-child"></i>
             </div>
             <div class="form-control">
-                <input id="instructor" type="text" placeholder="Instrutor">
-                <select name="instructors" id="selectInstructors"></select>
+                <select name="instructors" id="selectInstructors">
+                    <option>Treinador</option>
+                </select>
                 <i class="fas fa-user"></i>
 
             </div>

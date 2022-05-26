@@ -21,40 +21,20 @@
             <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
             <li><a href="../html/alunos.html" target="_parent">Alunos</a></li>
             <li><a href="../html/treinos.html" target="_parent">Treinos</a></li>
-            <li><a href="../html/login.html" target="_parent">Logout</a></li>>
+            <li><a href="../html/login.html" target="_parent">Logout</a></li>
         </ul>
     </nav>
     <div class="cadastro-width" style="background-color: rgb(12 12 22);">
         <form class="cadastro-form">
-            <h1 class="cadastro-titulo"> CADASTRO DE INSTRUTOR </h1>
+            <h1 class="cadastro-titulo"> ALUNOS </h1>
             <div class="form-control">
-                <input type="text" placeholder="Nome">
-                <i class="far fa-address-book"></i>
-            </div>
-            <div class="form-control">
-                <input type="text" placeholder="Login">
+                <select name="students" id="selectStudents">
+                    <option>Aluno</option>
+                </select>
                 <i class="fas fa-user"></i>
+                
             </div>
-            <div class="form-control">
-                <input type="password" placeholder="Senha">
-                <i class="fas fa-lock"></i>
-            </div> 
-            <div class="form-control">
-                <input type="data" placeholder="Data de nascimento">
-                <i class="far fa-calendar-alt"></i>
-            </div>
-            <div class="Gender">
-                <div class="radio-toolbar">
-                    <i class="fas fa-restroom"></i>
-                    <a>Gênero</a>
-                    <input type="radio" id="radiobtn1" name="fav_language" value="M" checked>
-                    <label for ="radiobtn1">Masculino</label>
-                    
-                    <input type="radio" id="radiobtn2" name="fav_language" value="F">
-                    <label for="radiobtn2">Feminino</label>
-                </div>
-            </div>
-            <button class="cadastro" translate="" onclick="">Cadastrar</button>
+            <button class="cadastro" translate="" onclick="">Selecionar</button>
         </form>
     </div>
 </body>

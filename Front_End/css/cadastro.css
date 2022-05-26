@@ -115,7 +115,8 @@ button.cadastro:hover {
 }
 
 input,
-button {
+button,
+select {
     border: 2px solid;
     border-color: var(--light-color);
     outline: none;
@@ -124,7 +125,8 @@ button {
     background: none;
 }
 
-input {
+input,
+select {
     width: 100%;
     color: var(--light-color);
     letter-spacing: 0.5px;
@@ -139,6 +141,20 @@ input ~ i {
     transform: translateY(-50%);
     transition: color   0.4s;
     opacity: 0.6;
+}
+
+select ~ i {
+    position: absolute;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: color   0.4s;
+    opacity: 0.6;
+}
+
+option{
+    background-color: var(--bg-color);
+    margin: 10px;
 }
 
 input:focus ~ i {
@@ -159,6 +175,56 @@ input:focus ~ i {
     margin-bottom: auto;
     border-radius: 40px;
     padding: 20px;
+}
+
+.radio-toolbar {
+    margin: 10px;
+    float: right;
+}
+
+.radio-toolbar input[type="radio"] {
+    opacity: 0;
+    width: 0;
+    margin: 20px;
+    position: absolute;
+}
+
+.radio-toolbar label {
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 16px;
+    border: 2px solid var(--light-color);
+    border-radius: 4px;
+    margin: 15px;
+}
+
+.radio-toolbar label:hover {
+    background-color: var(--mid-color);
+    color: var(--light-color);
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+    background-color: var(--light-color);
+    color: var(--mid-color);
+}
+
+.Gender{
+    border: 2px solid;
+    border-color: var(--light-color);
+    outline: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    background: none;
+    width: 80%;
+    position: relative;
+    margin-bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.Gender a{
+    margin-right: 70px;
+    margin-left: 10px;
 }
 
 @media(max-width: 1860px){
