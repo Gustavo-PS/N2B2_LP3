@@ -161,7 +161,7 @@ input:focus ~ i {
     padding: 20px;
 }
 
-@media(max-width: 1450px){
+@media(max-width: 1860px){
     .checkbtn{
         display: block;
     }
