@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>MOVE UP!</title>
     <meta charset="UTF-8">
@@ -8,13 +9,17 @@
     <link rel="stylesheet" href="../CSS/login.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <section class="side">        
-    </section>    
+    <section class="side">
+        
+    </section>
+    
     <section class="main">
         <div class="login-container">
             <p class="title">Move up!</p>
-            <div class="separator"></div>            
+            <div class="separator"></div>
+            
             <form class="login-form">
                 <div class="form-control">
                     <input type="text" placeholder="Usuário" id="login">
@@ -23,18 +28,23 @@
                 <div class="form-control">
                     <input type="password" placeholder="Senha" id="password">
                     <i class="fas fa-lock"></i>
-                </div>                
+                </div>
+                
                 <div class="radio-toolbar">
                     <input type="radio" id="radiobtn1" name="fav_language" value="1" checked>
                     <label for ="radiobtn1">Aluno</label>
+
                     <input type="radio" id="radiobtn2" name="fav_language" value="2">
                     <label for="radiobtn2">Instrutor</label>
-                </div>                
-                <button type="button" class="submit" onclick="realizaLogin()">Login</button>                
+                </div>
+                
+                <button type="button" class="submit" onclick="realizaLogin()">Login</button>
+                
                 <button class="cadastro">Cadastro</button>
             </form>
         </div>
-    </section>    
+    </section>
+    
     <script>
         function realizaLogin() {
             debugger;
@@ -42,7 +52,7 @@
                 var url;
                 var result;
                 var resultArray;
-                
+
                 if (document.querySelector('input[name="fav_language"]:checked').value == 1) {
                     url = "aluno";
                     var req = new XMLHttpRequest();
@@ -50,13 +60,17 @@
                     req.send();
                     result = req.responseText;
                     resultArray = JSON.parse(result);
-                    
+
                     for (var x = 0; x < resultArray.length; x++) {
                         if (resultArray[x].login == document.getElementById("login").value && resultArray[x].password == document.getElementById("password").value) {
-                            console.log(login);
+                            window.location.href = "menu.html?id=" + resultArray[x].id + "&type=1";
+                            return false;
                         }
                     }
+                    alert("Login ou senha inválida");
                 }
+
+
                 else {
                     url = "professor";
                     var req = new XMLHttpRequest();
@@ -64,20 +78,25 @@
                     req.send();
                     result = req.responseText;
                     resultArray = JSON.parse(result);
-                    
+
                     for (var x = 0; x < resultArray.length; x++) {
                         if (resultArray[x].login == document.getElementById("login").value && resultArray[x].password == document.getElementById("password").value) {
-                            window.location.href = "menu.html?id="+resultArray[x].id;
+                            localStorage.setItem("id", resultArray[x].id);
+                            localStorage.setItem("type", "2");
+                            window.location.href = "menu.html";
+
                             return false;
                         }
                     }
-                    
+                    alert("Login ou senha inválida");
+
                 }
             }
-            
         }
+
+
     </script>
-    
+
 </body>
 
 </html>

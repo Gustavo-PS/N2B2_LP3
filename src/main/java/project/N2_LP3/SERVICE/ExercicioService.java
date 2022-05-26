@@ -2,6 +2,7 @@ package project.N2_LP3.SERVICE;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import project.N2_LP3.DAO.AlunoDao;
 import project.N2_LP3.DAO.ExercicioDao;
 import project.N2_LP3.MODEL.Exercicio;
@@ -9,6 +10,7 @@ import project.N2_LP3.MODEL.Exercicio;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class ExercicioService {
 
     @Autowired

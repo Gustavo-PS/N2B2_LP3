@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>MOVE UP!</title>
     <meta charset="UTF-8">
@@ -8,7 +9,8 @@
     <link rel="stylesheet" href="../CSS/cadastro.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+
+<body onload="obtemTreinador()">
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -18,6 +20,7 @@
         <ul style="z-index: 5;">
             <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar Instrutor</a></li>
             <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
+            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar instrutor</a></li>
             <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
             <li><a href="#">Alunos</a></li>
             <li><a href="#">Treinos</a></li>
@@ -57,15 +60,19 @@
             </div>
             <div class="form-control">
                 <input id="trainning" type="text" placeholder="Treino">
+                <select name="instructors" id="selectTreinos"></select>
                 <i class="fas fa-child"></i>
             </div>
             <div class="form-control">
                 <input id="instructor" type="text" placeholder="Instrutor">
+                <select name="instructors" id="selectInstructors"></select>
                 <i class="fas fa-user"></i>
+
             </div>
             <button class="cadastro" translate="" onclick="insereAluno()">Cadastrar</button>
         </form>
     </div>
+
     <script>
         function insereAluno() {
             debugger;
@@ -76,25 +83,59 @@
 
                 var body = JSON.stringify({
                     "name": document.getElementById("nome").value,
-                    "login": document.getElementById("login").value ,
+                    "login": document.getElementById("login").value,
                     "password": document.getElementById("password").value,
                     "birthday": document.getElementById("birthday").value.split("/")[2] + "-" +
                         document.getElementById("birthday").value.split("/")[1] + "-" +
-                        document.getElementById("birthday").value.split("/")[0] + "T00:00:00" ,
-                    "genre": document.getElementById("genre").value ,
-                    "width": document.getElementById("width").value ,
-                    "heigth": document.getElementById("heigth").value ,
-                    "training": document.getElementById("trainning").value ,
-                    "instructor": document.getElementById("instructor").value
-                });             
+                        document.getElementById("birthday").value.split("/")[0] + "T00:00:00",
+                    "genre": document.getElementById("genre").value,
+                    "width": document.getElementById("width").value,
+                    "heigth": document.getElementById("heigth").value,
+                    "training": document.getElementById("selectTreinos").value,
+                    "instructor": document.getElementById("selectInstructors").value
+                });
 
                 req.send(body);
             }
             catch {
+
             }
             var result = req.responseText;
             var resultArray = JSON.parse(result);
         }
+
+        function obtemTreinos() {
+            debugger;
+            var req = new XMLHttpRequest();
+            req.open("get", "http://localhost:8080/api/exercicio", false);
+            req.send();
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+
+            for (var x = 0; x < resultArray.length; x++) {
+                var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+                document.getElementById("selectTreinos").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()))
+            }
+        }
+
+        function obtemTreinador() {
+            debugger;
+            var req = new XMLHttpRequest();
+            req.open("get", "http://localhost:8080/api/professor", false);
+            req.send();
+            var result;
+            result = req.responseText;
+            var resultArray;
+            resultArray = JSON.parse(result);
+
+            for (var x = 0; x < resultArray.length; x++) {
+                var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+                document.getElementById("selectInstructors").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()))
+            }
+            obtemTreinos();
+        }
+
     </script>
 </body>
+
 </html>

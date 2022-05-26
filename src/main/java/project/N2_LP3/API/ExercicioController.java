@@ -10,6 +10,7 @@ import project.N2_LP3.SERVICE.ExercicioService;
 import java.util.List;
 import java.util.UUID;
 
+@RestController
 public class ExercicioController {
 
     private final ExercicioService exercicioService;
