@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload="ocultaBotoes()">
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -18,14 +18,33 @@
         </label>
         <label class="titulo">MOVE UP!</label>
         <ul style="z-index: 5;">
-            <li><a href="../html/cadastro_instrutor.html" target="_parent">Cadastrar Instrutor</a></li>
-            <li><a href="../html/cadastro_aluno.html" target="_parent">Cadastrar Alunos</a></li>
-            <li><a href="../html/cadastro_exercicios.html" target="_parent">Cadastrar Treinos</a></li>
-            <li><a href="../html/alunos.html" target="_parent">Alunos</a></li>
-            <li><a href="../html/treinos.html" target="_parent">Treinos</a></li>
-            <li><a href="../html/login.html" target="_parent">Logout</a></li>
+            <li><a href="../html/cadastro_instrutor.html" target="_parent" id="btnCadastrarProfessor">Cadastrar
+                    Instrutor</a></li>
+            <li ><a href="../html/cadastro_aluno.html" target="_parent" id="btnCadastrarAluno">Cadastrar Alunos</a>
+            </li>
+            <li><a href="../html/cadastro_exercicios.html" target="_parent" id="btnCadastrarTreino">Cadastrar
+                    Treinos</a></li>
+            <li><a href="../html/alunos.html" target="_parent" id="btnAluno">Alunos</a></li>
+            <li><a href="../html/treinos.html" target="_parent" id="btnTreino">Treinos</a></li>
+            <li><a href="../html/login.html" target="_parent" id="btnLogout">Logout</a></li>
         </ul>
     </nav>
+    <script>
+        function ocultaBotoes() {
+            var id = localStorage.getItem("id");
+            var tipo = localStorage.getItem("type");
+
+            if (tipo == "1") {
+                document.getElementById("btnCadastrarAluno").style.display = "none";
+                document.getElementById("btnCadastrarProfessor").style.display = "none";
+                document.getElementById("btnCadastrarTreino").style.display = "none";
+                document.getElementById("btnAluno").style.display = "none";
+            } else {
+
+            }
+
+        }
+    </script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../CSS/cadastro.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="obtemAluno()">
     <nav>
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn">
@@ -28,14 +28,42 @@
         <form class="cadastro-form">
             <h1 class="cadastro-titulo"> ALUNOS </h1>
             <div class="form-control">
-                <select name="students" id="selectStudents">
-                    <option>Aluno</option>
+                <select onchange="armazenaAlunoSelecionado()" name="students" id="selectStudents">
                 </select>
                 <i class="fas fa-user"></i>
                 
             </div>
-            <button class="cadastro" translate="" onclick="">Selecionar</button>
+            <button class="cadastro" type="button" translate="" onclick="redireciona()">Selecionar</button>
         </form>
     </div>
+
+    <script>
+
+function obtemAluno() {
+
+var req = new XMLHttpRequest();
+req.open("get", "http://localhost:8080/api/aluno", false);
+req.send();
+var result = req.responseText;
+var resultArray = JSON.parse(result);
+
+for (var x = 0; x < resultArray.length; x++) {
+        var item = new Option(resultArray[x].name.toString(), resultArray[x].id.toString());
+        document.getElementById("selectStudents").options.add(new Option(resultArray[x].name.toString(), resultArray[x].id.toString()));
+    
+}
+}
+function editarTela(){
+window.location.href = "editar_treino.html";
+}
+
+function armazenaAlunoSelecionado(){
+    localStorage.setItem("alunoSelecionado", document.getElementById("selectStudents").value);
+}
+
+function redireciona(){
+    window.location.href = "editar_aluno.html";
+}
+    </script>
 </body>
 </html>

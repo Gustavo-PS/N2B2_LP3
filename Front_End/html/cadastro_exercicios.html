@@ -28,13 +28,38 @@
         <form class="cadastro-form">
             <h1 class="cadastro-titulo"> CADASTRO DE TREINOS </h1>
             <div class="form-control">
-                <input type="text" placeholder="Nome">
+                <input type="text" id="nome" placeholder="Nome">
             </div>
             <div class="form-control">
-                <input type="text" placeholder="Descrição">
+                <input type="text" id="description" placeholder="Descrição">
             </div>
-            <button class="cadastro" translate="" onclick="">Cadastrar</button>
+            <button class="cadastro" translate="" onclick="insereTreino()">Cadastrar</button>
         </form>
     </div>
+
+    <script>
+        function insereTreino() {
+            
+            try {
+                var req = new XMLHttpRequest();
+                req.open("post", "http://localhost:8080/api/exercicio", false);
+                req.setRequestHeader("Content-Type", "application/json");
+
+                var body = JSON.stringify({
+                    "name": document.getElementById("nome").value,
+                    "description": document.getElementById("description").value
+                });
+
+                req.send(body);
+            }
+            catch {
+
+            }
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+        }
+   
+       
+    </script>
 </body>
 </html>

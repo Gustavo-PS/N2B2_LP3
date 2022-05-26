@@ -28,34 +28,64 @@
         <form class="cadastro-form">
             <h1 class="cadastro-titulo"> CADASTRO DE INSTRUTOR </h1>
             <div class="form-control">
-                <input type="text" placeholder="Nome">
+                <input type="text" id="nome" placeholder="Nome">
                 <i class="far fa-address-book"></i>
             </div>
             <div class="form-control">
-                <input type="text" placeholder="Login">
+                <input type="text" id="login" placeholder="Login">
                 <i class="fas fa-user"></i>
             </div>
             <div class="form-control">
-                <input type="password" placeholder="Senha">
+                <input type="password" id="password" placeholder="Senha">
                 <i class="fas fa-lock"></i>
             </div> 
             <div class="form-control">
-                <input type="data" placeholder="Data de nascimento">
+                <input type="data" id="birthday" placeholder="Data de nascimento">
                 <i class="far fa-calendar-alt"></i>
             </div>
             <div class="Gender">
                 <div class="radio-toolbar">
                     <i class="fas fa-restroom"></i>
                     <a>Gênero</a>
-                    <input type="radio" id="radiobtn1" name="fav_language" value="M" checked>
+                    <input type="radio" id="radiobtn1" name="rdGenre" value="M" checked>
                     <label for ="radiobtn1">Masculino</label>
                     
-                    <input type="radio" id="radiobtn2" name="fav_language" value="F">
+                    <input type="radio" id="radiobtn2" name="rdGenre" value="F">
                     <label for="radiobtn2">Feminino</label>
                 </div>
             </div>
-            <button class="cadastro" translate="" onclick="">Cadastrar</button>
+            <button class="cadastro" translate="" onclick="insereProfessor()">Cadastrar</button>
         </form>
     </div>
+
+    <script>
+        function insereProfessor() {
+            
+            try {
+                var req = new XMLHttpRequest();
+                req.open("post", "http://localhost:8080/api/professor", false);
+                req.setRequestHeader("Content-Type", "application/json");
+
+                var body = JSON.stringify({
+                    "name": document.getElementById("nome").value,
+                    "login": document.getElementById("login").value,
+                    "password": document.getElementById("password").value,
+                    "birthday": document.getElementById("birthday").value.split("/")[2] + "-" +
+                        document.getElementById("birthday").value.split("/")[1] + "-" +
+                        document.getElementById("birthday").value.split("/")[0] + "T00:00:00",
+                    "genre": document.querySelector('input[name="rdGenre"]:checked').value
+                });
+
+                req.send(body);
+            }
+            catch {
+
+            }
+            var result = req.responseText;
+            var resultArray = JSON.parse(result);
+        }
+   
+       
+    </script>
 </body>
 </html>

@@ -87,7 +87,7 @@ public class FakeAlunoDataAccessService implements AlunoDao {
     @Override
     public int updateAluno(Aluno aluno) {
         try {
-            String update = "UPDATE tb_student SET name = ?, birthday = ?, password = ?, genre = ?, height = ?, width = ?, training = ?, instructor = ? WHERE id = ?`";
+            String update = "UPDATE tb_student SET name = ?, birthday = ?, password = ?, genre = ?, height = ?, width = ?, training = ?, instructor = ? WHERE id = ?";
             preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, aluno.getName());
             preparedStatement.setDate(2, new java.sql.Date(aluno.getBirthday().getTime()));

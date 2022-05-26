@@ -47,7 +47,6 @@
     
     <script>
         function realizaLogin() {
-            debugger;
             if (document.querySelector('input[name="fav_language"]:checked').value != null) {
                 var url;
                 var result;
@@ -63,7 +62,10 @@
 
                     for (var x = 0; x < resultArray.length; x++) {
                         if (resultArray[x].login == document.getElementById("login").value && resultArray[x].password == document.getElementById("password").value) {
-                            window.location.href = "menu.html?id=" + resultArray[x].id + "&type=1";
+                            localStorage.setItem("id", resultArray[x].id);
+                            localStorage.setItem("type", "1");
+                            localStorage.setItem("treino", resultArray[x].training);
+                            window.location.href = "menu.html";
                             return false;
                         }
                     }
